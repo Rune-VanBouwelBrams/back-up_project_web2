@@ -1,0 +1,406 @@
+body {
+    font-family: 'Assistant', sans-serif;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    margin: 0;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 9.5rem; /* footer height (zodat er genoeg plaats is voor de footer onderaan de pagina) */
+}
+
+/* .pagewrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+*/
+
+h1{
+    font-family: 'Amatic SC', cursive;
+    font-size: 50px;
+    color: white;
+    grid-column: 1 / 5;
+    margin-bottom: 0;
+}
+
+h2{
+    font-size: 18px;
+    grid-column: 1 / 5;
+    color: #ffffff96; /* rgba(212, 212, 222, 0.23) */
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 15px;
+    color: white;
+}
+
+p {
+    font-size: 18px;
+}
+
+header{
+    text-align: center;
+    position: relative;
+    z-index: 999; /* zodat het zeker vanboven blijft */
+    width: 100%;
+    background-color: rgb(60, 46, 61); /* 3F1434FF of 31172EFF*/
+    height: available;
+    /* margin-top: 0; */
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: block;
+}
+
+.nav {
+    background-color: rgba(60, 46, 61, 0.67);
+    grid-column: 1 / 5; /* misschien terug aanpassen door nieuwe zoekFormulier pagina */
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+nav {
+    position: absolute; /* omdat header al "fixed" is, zorgt dit ervoor dat de positie hier tegenover relatief is (?) */
+    text-align: center;
+    top: 100%;
+    left: 0;
+    background-color: rgba(60, 46, 61, 100); /* kleur nog aanpassen 3F143470 of rgba(60, 46, 61, 0.04) */
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+    overflow: hidden; /* zodat achtergrond dezelfde kleur heeft als het menu, ook wanneer het kleiner scherm heeft */
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    text-align: center;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    display: block;
+}
+
+nav a {
+    color: #ffffff96;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+    color: #331049
+}
+
+.nav-toggle:checked ~ nav { /* ~ zoekt naar een sibling van nav-toggle genaamd nav */
+    transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 1000px){
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+        z-index: 999;
+        padding-bottom: 0;
+    }
+
+    /*.logo {
+        grid-column: 1 / 2;
+        height: auto;
+        justify-self: center;
+    } */
+
+    /* .bedrijf {
+        grid-column: 2 / 3;
+    } */
+
+    nav {
+        all: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        z-index: 9999;
+        padding: 10px;
+        background-color: rgba(131, 121, 134, 0.65); /* rgba(60, 46, 61, 0.23) rgba(60, 46, 61, 0.5) */
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+        display: inline-block;
+        align-items: center;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+        color: #ffffff96;
+        margin: 7em;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -.75em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover::before {
+        transform: scale(1, 1);
+    }
+
+    .image {
+        max-width: 150px;
+        height: auto;
+    }
+
+    /* .”doel” {
+        margin: 20px 0;
+    }
+
+    .”doel” > p{
+        margin: 10px 0;
+    }
+
+    .”uitleg” {
+        margin: 20px 0;
+    }
+
+    .”uitleg” > p {
+        margin: 10px 0;
+    }
+
+    .”tijdstippen” {
+        margin: 30px 0;
+    }
+
+    .”tijdstippen” > p {
+        margin: 10px 0;
+    } */
+
+}
+
+main {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image {
+    max-width: 150px;
+    height: auto;
+}
+
+.”doel” {
+    margin: 30px 0;
+}
+
+.”doel” > p{
+    margin: 10px 0;
+}
+
+.”uitleg” {
+    margin: 30px 0;
+}
+
+.”uitleg” > p {
+    margin: 10px 0;
+}
+
+.”tijdstippen” {
+    margin: 30px 0;
+}
+
+.”tijdstippen” > p {
+    margin: 10px 0;
+}
+
+.meesteEierenDACP {
+    margin: 30px;
+}
+
+.meesteEierenDACP > p {
+    margin: 10px 0;
+}
+
+table {
+
+}
+
+th{
+    text-align: left;
+}
+
+td, th{
+    padding: 1em;
+}
+
+
+/* voegToe formulier */
+.container {
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+
+.formulier {
+    max-width: 100%;
+    /* zorgen dat dit in het midden staat */
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(210, 161, 200, 0.37);
+    border-radius: 4px; /* afgeronde borders */
+    box-sizing: border-box; /* zodat padding en width op dezelfde plaats blijven */
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(210, 161, 200, 0.37);
+    border-radius: 4px; /* afgeronde borders */
+    box-sizing: border-box; /* zodat padding en width op dezelfde plaats blijven */
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+
+}
+
+input[type=submit] {
+    background-color: #3c2e3d; /* voordien: rgba(232, 19, 229, 0.42) */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+input[type=submit]:hover {
+    background-color: rgba(60, 46, 61, 0.67);
+
+}
+
+input[type=date], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(210, 161, 200, 0.37);
+    border-radius: 4px; /* afgeronde borders */
+    box-sizing: border-box; /* zodat padding en width op dezelfde plaats blijven */
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+footer {
+    display: inline-block;
+    background-color: rgb(60, 46, 61);
+    width: 100%;
+    justify-content: left;
+    margin-top: 0.5rem;
+}
+
+#footer {
+    position: absolute; /* zodat die onderaan blijft staan */
+    bottom: 0; /* zodat die onderaan plakt */
+    width: 100%;
+    height: 9.5rem; /* footer height (moet hetzelfde zijn als bij #content-wrap (WANT: zorgt er dan voor dat er genoeg plaats is onderaan de pagina voor de footer, zodat die niet over iets van de main gaat)) */
+}
+
+footer h4 {
+    margin: 10px;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+footer p{
+    color: #ffffff96;
+    font-size: 12px;
+    margin: 10px;
+    padding-left: 1rem;
+}
+
+footer p a {
+    /*text-decoration: none;*/
+    color: #ffffff96;
+}
+
+
+/* misschien verschillende class/divs maken van de verschillende alineas in de index.jsp???? */
